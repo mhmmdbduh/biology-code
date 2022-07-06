@@ -1,0 +1,64 @@
+### function Count(Motifs) that takes a list of strings Motifs as input and returns the count matrix of  Motifs (as a dictionary of lists) ###
+
+def Count(Motifs):
+    count = {} # initializing the count dictionary
+    k = len(Motifs[0])
+    for symbol in "ACGT":
+        count[symbol] = []
+        for j in range(k):
+             count[symbol].append(0)
+    t = len(Motifs)
+    for i in range(t):
+        for j in range(k):
+            symbol = Motifs[i][j]
+            count[symbol][j] += 1
+    return count
+
+### function Profile(Motifs) that takes Motifs as input and returns their profile matrix as a dictionary of lists ###
+
+# Input:  A list of kmers Motifs
+# Output: the profile matrix of Motifs, as a dictionary of lists.
+def Profile(Motifs):
+    t = len(Motifs)
+    k = len(Motifs[0])
+    profile = {}
+    profile = Count(Motifs)
+    # insert your code here
+    for i in profile:
+        for j in range (k):
+            profile [i][j] = profile [i][j]/t    
+    return profile
+    
+    ### function Consensus(Motifs) that takes a list of strings Motifs as input and returns the consensus string of  Motifs. ###
+   
+   def Consensus(Motifs):
+    
+      k= len(Motifs[0])
+      count = Count(Motifs)
+      consensus = ""
+      for j in range(k):
+          m = 0
+          frequentSymbol = ""
+          for symbol in "ACGT":
+              if count[symbol][j] > m:
+                  m = count[symbol][j]
+                  frequentSymbol = symbol
+          consensus += frequentSymbol
+      return consensus
+    
+    ### Function Scoring(Moifs) summing the number of symbols in the j-th column of Motifs that do not match the symbol in position j of the consensus string. ###
+    
+    def Score(Motifs):
+    
+      consensus = Consensus(Motifs)
+      count = 0
+      for motif in Motifs:
+          for index in range(len(motif)):
+              if motif[index] != consensus[index]:
+                 count += 1
+      return count
+      
+      
+    
+    
+    
