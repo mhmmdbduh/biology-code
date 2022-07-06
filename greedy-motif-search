@@ -8,8 +8,17 @@ Profile = {
 # Input:  String Text and profile matrix Profile
 # Output: Pr(Text, Profile)
 def Pr(Text, Profile):
-    # insert your code here
     p = 1
     for i in range(len(Text)):
         p = p * Profile[Text[i]][i]
     return p
+
+def ProfileMostProbableKmer(text, k, profile): ## Find a Profile-most probable k-mer in a string  ### 
+    kmer = ''
+    t = len(text)
+    prob_dict = {}
+    for i in range(t-k+1):
+        kmer = text[i:i+k]
+        prob_dict[kmer] = Pr(kmer, profile)
+        max_kmer = max(prob_dict, key = prob_dict.get)
+    return max_kmer
