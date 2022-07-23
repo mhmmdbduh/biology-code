@@ -1,0 +1,8 @@
+def reverse_complement(test_dna):
+    complement_dictionary = {"A":"T", "T":"A", "G":"C", "C":"G"}
+    reverse = test_dna[::-1]
+    complement_bases = []
+    for base in reverse:
+         complement_bases.append(complement_dictionary[base])
+    return "".join(complement_bases)
+print(reverse_complement(test_dna))
