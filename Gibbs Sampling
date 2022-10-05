@@ -1,0 +1,5 @@
+def Normalize(Probabilities):
+    pr = {}
+    for k,v in Probabilities.items():
+        pr[k] = Probabilities[k]/sum(Probabilities.values())
+    return pr
