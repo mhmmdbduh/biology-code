@@ -1,5 +1,15 @@
+import random
 def Normalize(Probabilities):
     pr = {}
     for k,v in Probabilities.items():
         pr[k] = Probabilities[k]/sum(Probabilities.values())
     return pr
+def WeightedDie(Probabilities):
+    kmer = '' # output variable
+    r = random.uniform(0, 1)
+    # your code here
+    for p in Probabilities:
+        r -= Probabilities[p]
+        if r <=0:
+            return p    
+    return kmer
